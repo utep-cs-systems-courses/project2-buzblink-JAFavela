@@ -19,7 +19,7 @@ load: toy.elf
 	msp430loader.sh toy.elf
 
 clean:
-	rm -f *.o *.elf *~
+	rm -f *.o *.elf *~ *#
 
 led.o: led.h
 
