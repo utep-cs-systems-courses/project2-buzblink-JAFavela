@@ -17,9 +17,7 @@ toy.elf: ${COMMON_OBJECTS} main.o buzzer.o p1_interrupt_handler.o switches.o sta
 
 load: toy.elf
 	msp430loader.sh toy.elf
-run:
-	rm -f *.o *.elf *~ *#
-	make load
+	make clean
 
 clean:
 	rm -f *.o *.elf *~ *#
