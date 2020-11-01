@@ -7,7 +7,7 @@
 void chona()
 {
   static int songState=0;
-
+ 
   switch(songState){
   case 242:
     songState=0;
@@ -44,20 +44,20 @@ void siren()
 
 void dim_rg_led()
 {
-  static char ledState=0;
+  static char ledState1=0;
   switch(ledState){
   case 0:         /* leds are both off from 0-2 */
     red_on=0;
     green_on=0;
-    ledState++;
+    ledState1++;
     break;
   case 5:         /* leds are on at 3 */
     red_on=1;
     green_on=1;
-    ledState=0;
+    ledState1=0;
     break;
   default:
-    ledState++;
+    ledState1++;
   }
   led_changed=1;
   led_update();
@@ -65,7 +65,8 @@ void dim_rg_led()
 
 
 
-void alternate_led(){
+void alternate_led()
+{
   static char ledState=0;
   switch(ledState){
   case 0:
