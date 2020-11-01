@@ -4,6 +4,20 @@
 #include "buzzer.h"
 #include "switches.h"
 
+void chona()
+{
+  static int songState=0;
+
+  switch(songState){
+  case 420:
+    songState=0;
+  default:
+    buzzer_set_period(cSong[songState]);
+    led_switch(chona[songState]);
+    songState++;
+  }  
+}
+
 void siren()
 {
   static long cyc = 4000;   /* 500Hz = 4000 cycles */
@@ -14,7 +28,7 @@ void siren()
     cyc=cyc-20;            /* Decrement cycle by 180 = 1/20 steps towards 400(5000Hz) */
     if(cyc==580){           /* When limit is reached we set cycle to 400 and move to next state */
       cyc=600;
-      state=1;
+      state++;
     }
     break;
   case 1:                   /* Going down with green led */
@@ -50,13 +64,6 @@ void dim_rg_led()
   
 }
 
-void both_led_off(){
-  red_on=0;
-  green_on=0;
-  led_changed=1;
-  led_update();
-}
-
 void alternate_led(){
   static char ledState=0;
   switch(ledState){
@@ -80,28 +87,33 @@ void alternate_led(){
   led_update();
 }
 
-void no_dim(){
-  red_on=1;
-  green_on=1;
+void led_switch(int note){
+  if(note==0){
+    red_on=0;
+    green_on=0;
+  }
+  else if(note%2==0){
+    red_on=0;
+    green_on=1;
+  }
+  else{
+    red_on=1;
+    green_on=0;
+  }
   led_changed=1;
   led_update();
 }
 
 void state_advance()		
 {
-  static char sirenCount=0;
   if(bState==0){
     dim_rg_led();
   }
   else if(bState==1){
-    both_led_off();
+    chona();
   }
   else if(bState==2){
-    sirenCount++;
-    if(sirenCount==2){
-      siren();
-      sirenCount=0;
-    }
+    siren();
     alternate_led();
   }
   else if(bState==3){
