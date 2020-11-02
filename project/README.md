@@ -1,6 +1,6 @@
-#Toy:
+# Toy:
 
-###What it does:
+### What it does:
   -You hit the first button and you get both leds dimmed.
   -You hit the second button and you get both leds at 100% intensity.
   -You hit the third and you get a siren with the green and red light alternating.
